@@ -10,8 +10,15 @@ print(fruit_sales)
 
 def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataFrame:
     
-    if not re.match(r'^[A-Za-z_]+$', new_column):
-        raise ValueError("Col can only contain letter and underscore")
+    pattern = r'^[A-Za-z_]+$'
+
+    if not re.match(pattern, new_column):
+        return pd.DataFrame()
+
+    for col in df.columns:
+        if not re.match(pattern, col):
+            return pd.DataFrame()
+
 
     df = df.copy()
 
