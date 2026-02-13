@@ -2,15 +2,14 @@ import pandas as pd
 import re
 
 
-fruit_sales = pd.DataFrame({"quantity": [10, 3], "price": [10, 1]}, index=["banana", "apple"])
+fruit_sales = pd.DataFrame(
+    {"quantity": [10, 3], "price": [10, 1]}, index=["banana", "apple"]
+)
 print(fruit_sales)
 
 
-
-
 def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataFrame:
-    
-    pattern = r'^[A-Za-z_]+$'
+    pattern = r"^[A-Za-z_]+$"
 
     if not re.match(pattern, new_column):
         return pd.DataFrame()
@@ -18,7 +17,6 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     for col in df.columns:
         if not re.match(pattern, col):
             return pd.DataFrame()
-
 
     df = df.copy()
 
