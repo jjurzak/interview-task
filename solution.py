@@ -5,7 +5,6 @@ import re
 fruit_sales = pd.DataFrame(
     {"quantity": [10, 3], "price": [10, 1]}, index=["banana", "apple"]
 )
-print(fruit_sales)
 
 
 def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataFrame:
@@ -28,5 +27,12 @@ def add_virtual_column(df: pd.DataFrame, role: str, new_column: str) -> pd.DataF
     return df
 
 
-sales_total = add_virtual_column(fruit_sales, "quantity * price", "total")
-print(sales_total)
+def operations(df: pd.DataFrame, operator: str) -> pd.DataFrame:
+    expression = f"quantity {operator} price"
+    return add_virtual_column(df, expression, "total")
+
+
+print(operations(fruit_sales, "+"))
+print(operations(fruit_sales, "-"))
+print(operations(fruit_sales, "*"))
+print(operations(fruit_sales, "dummy_errorr"))
